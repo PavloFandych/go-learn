@@ -8,7 +8,7 @@ import (
 
 func main() {
 	var w core.Worker = &core.CustomWorker{}
-	input := w.GenerateIntegerSlice(5000000)
+	input := w.GenerateIntegerSlice(3000)
 	channel := w.GenerateIntegerChannel(2)
 
 	defer w.Close(channel)
@@ -31,18 +31,26 @@ func main() {
 	fmt.Printf("Result seq: %d, duration: %d\n", seqResult, seqDuration)
 }
 
-func sumPar(input []int, result chan int64) {
+func sumPar(input []int32, result chan int64) {
 	var total int64 = 0
 	for _, value := range input {
-		total += int64(value)
+		if isOdd(value) {
+			total += int64(value)
+		}
 	}
 	result <- total
 }
 
-func sumSeq(input []int) int64 {
+func sumSeq(input []int32) int64 {
 	var total int64 = 0
 	for _, value := range input {
-		total += int64(value)
+		if isOdd(value) {
+			total += int64(value)
+		}
 	}
 	return total
+}
+
+func isOdd(input int32) bool {
+	return input&1 == 1
 }

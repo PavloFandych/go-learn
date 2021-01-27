@@ -7,7 +7,7 @@ type Worker interface {
 }
 
 type IntegerSliceGenerator interface {
-	GenerateIntegerSlice(size int) []int
+	GenerateIntegerSlice(size int) []int32
 }
 
 type IntegerChannelGenerator interface {

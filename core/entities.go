@@ -13,10 +13,10 @@ func (c *CustomWorker) GenerateIntegerChannel(capacity int64) chan int64 {
 	return make(chan int64, capacity)
 }
 
-func (c *CustomWorker) GenerateIntegerSlice(size int) []int {
-	result := make([]int, 0, size)
+func (c *CustomWorker) GenerateIntegerSlice(size int) []int32 {
+	result := make([]int32, 0, size)
 	for index := 0; index < size; index++ {
-		result = append(result, rand.Int())
+		result = append(result, rand.Int31())
 	}
 	return result
 }
